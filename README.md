@@ -14,7 +14,7 @@
   </a>
 </p>
 
-This package provides some additional, convenient helpers for you to use with your Laravel project.
+This package provides some additional, convenient helpers for you to use in your Laravel project.
 
 ## Installation
 
@@ -81,4 +81,4 @@ $extendingClasses = Discovery::extendsWithin('app\Models', 'Illuminate\Database\
 
 ## License
 
-Convenient Laravel Helpers is open-sourced software licensed under the [MIT license](LICENSE.md).
+Lyhty Support is open-sourced software licensed under the [MIT license](LICENSE.md).
