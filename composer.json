@@ -8,8 +8,8 @@
     ],
     "homepage": "https://matti.suoraniemi.com/creations/lyhty/support",
     "require": {
-        "php": ">=7.1.3",
-        "laravel/framework": ">=5.6"
+        "php": "^7.4 | ^8.0",
+        "laravel/support": "^8.0 | ^9.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~7.0"
