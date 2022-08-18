@@ -2,17 +2,11 @@
   <img src="https://matti.suoraniemi.com/storage/lyhty-support.png" width="400">
 </p>
 
-<p>
-  <a href="https://packagist.org/packages/lyhty/support">
-    <img src="https://img.shields.io/packagist/dt/lyhty/support" alt="Total Downloads">
-  </a>
-  <a href="https://packagist.org/packages/lyhty/support">
-    <img src="https://img.shields.io/packagist/v/lyhty/support" alt="Latest Stable Version">
-  </a>
-  <a href="https://packagist.org/packages/lyhty/support">
-    <img src="https://img.shields.io/packagist/l/lyhty/support" alt="License">
-  </a>
-</p>
+[![Total Downloads](https://img.shields.io/packagist/dt/lyhty/support?style=flat-square)](https://packagist.org/packages/lyhty/support)
+[![Latest Stable Version](https://img.shields.io/packagist/v/lyhty/support?style=flat-square)](https://packagist.org/packages/lyhty/support)
+[![License](https://img.shields.io/packagist/l/lyhty/support?style=flat-square)](https://packagist.org/packages/lyhty/support)
+
+<!-- CUTOFF -->
 
 This package provides some additional, convenient helpers for you to use in your Laravel project.
 
