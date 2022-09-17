@@ -2,8 +2,9 @@
   <img src="https://matti.suoraniemi.com/storage/lyhty-support.png" width="400">
 </p>
 
-[![Total Downloads](https://img.shields.io/packagist/dt/lyhty/support?style=flat-square)](https://packagist.org/packages/lyhty/support)
 [![Latest Stable Version](https://img.shields.io/packagist/v/lyhty/support?style=flat-square)](https://packagist.org/packages/lyhty/support)
+[![PHP](https://img.shields.io/packagist/php-v/lyhty/support?style=flat-square)](https://packagist.org/packages/lyhty/support)
+[![Total Downloads](https://img.shields.io/packagist/dt/lyhty/support?style=flat-square)](https://packagist.org/packages/lyhty/support)
 [![License](https://img.shields.io/packagist/l/lyhty/support?style=flat-square)](https://packagist.org/packages/lyhty/support)
 
 <!-- CUTOFF -->
