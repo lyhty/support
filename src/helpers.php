@@ -1,30 +1,31 @@
 <?php
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
-use Illuminate\Support\Arr;
 
-if (!function_exists('class_uses_trait')) {
+if (! function_exists('class_uses_trait')) {
     /**
      * Return boolean value whether the given class uses given trait.
      *
-     * @param mixed $class An object (class instance) or a string (class name).
-     * @param string $trait Class name of the trait.
-     * @param bool $recursive Should trait's be found recursively.
+     * @param  mixed  $class An object (class instance) or a string (class name).
+     * @param  string  $trait Class name of the trait.
+     * @param  bool  $recursive Should trait's be found recursively.
      * @return bool
      */
     function class_uses_trait($class, $trait, bool $recursive = true): bool
     {
         $func = $recursive ? 'class_uses_recursive' : 'class_uses';
+
         return isset($func($class)[$trait]);
     }
 }
 
-if (!function_exists('array_depth')) {
+if (! function_exists('array_depth')) {
     /**
      * Return integer describing the max depth of the given array.
      *
-     * @param array $array
+     * @param  array  $array
      * @return int
      */
     function array_depth(array $array)
@@ -41,12 +42,12 @@ if (!function_exists('array_depth')) {
     }
 }
 
-if (!function_exists('class_implements_interface')) {
+if (! function_exists('class_implements_interface')) {
     /**
      * Return boolean value whether the given class implements given interface.
      *
-     * @param mixed $class An object (class instance) or a string (class name).
-     * @param string $interface Class name of the interface.
+     * @param  mixed  $class An object (class instance) or a string (class name).
+     * @param  string  $interface Class name of the interface.
      * @return bool
      */
     function class_implements_interface($class, $interface): bool
@@ -55,12 +56,12 @@ if (!function_exists('class_implements_interface')) {
     }
 }
 
-if (!function_exists('class_extends')) {
+if (! function_exists('class_extends')) {
     /**
      * Return boolean value whether the given class extends given parent class.
      *
-     * @param mixed $class An object (class instance) or a string (class name).
-     * @param string $interface Class name of the parent class.
+     * @param  mixed  $class An object (class instance) or a string (class name).
+     * @param  string  $interface Class name of the parent class.
      * @return bool
      */
     function class_extends($class, $parent): bool
@@ -69,26 +70,27 @@ if (!function_exists('class_extends')) {
     }
 }
 
-if (!function_exists('set_type')) {
+if (! function_exists('set_type')) {
     /**
      * Alias for 'settype' which allows non-variables as arguments.
      *
-     * @param mixed $value
-     * @param string $type
+     * @param  mixed  $value
+     * @param  string  $type
      * @return void
      */
     function set_type($value, $type)
     {
         settype($value, $type);
+
         return $value;
     }
 }
 
-if (!function_exists('trim_spaces')) {
+if (! function_exists('trim_spaces')) {
     /**
      * Trim spaces from string.
      *
-     * @param string $string
+     * @param  string  $string
      * @return string
      */
     function trim_spaces(string $string): string
@@ -97,24 +99,24 @@ if (!function_exists('trim_spaces')) {
     }
 }
 
-if (!function_exists('not_null')) {
+if (! function_exists('not_null')) {
     /**
      * !is_null
      *
-     * @param mixed $var
+     * @param  mixed  $var
      * @return bool
      */
     function not_null($var): bool
     {
-        return !is_null($var);
+        return ! is_null($var);
     }
 }
 
-if (!function_exists('get_bool')) {
+if (! function_exists('get_bool')) {
     /**
      * Get boolean value from given value. Accepts string true/false.
      *
-     * @param mixed $value
+     * @param  mixed  $value
      * @return bool
      */
     function get_bool($value): bool
@@ -127,34 +129,33 @@ if (!function_exists('get_bool')) {
     }
 }
 
-if (!function_exists('class_namespace')) {
+if (! function_exists('class_namespace')) {
     /**
      * Get namespace of given class.
      *
-     * @param string $className
+     * @param  string  $className
      * @return string
      */
     function class_namespace(string $className): string
     {
-        return (string) Str::of($className)->before('\\' . class_basename($className));
+        return (string) Str::of($className)->before('\\'.class_basename($className));
     }
 }
 
-if (!function_exists('___')) {
+if (! function_exists('___')) {
     /**
      * Translate given messages and glue them together.
      *
-     * @param array $keys
+     * @param  array  $keys
      * Translation keys / strings that will be translated.
-     * @param array $replace
+     * @param  array  $replace
      * Wildcards to be replaced. Example: `['name' => 'value']` would replace `:name` with `value` in given keys.
-     * @param array $numbers
+     * @param  array  $numbers
      * Array of numbers that dictate whether choice translation method will be utilized for matching index in `$keys` array.
-     * @param string|null $locale
+     * @param  string|null  $locale
      * Locale for given translation keys.
-     * @param string $glue
+     * @param  string  $glue
      * What the translated keys should be glued together with.
-     * 
      * @return string
      */
     function ___(array $keys, array $replace = [], array $numbers = [], string $locale = null, string $glue = ' '): string

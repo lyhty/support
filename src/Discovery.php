@@ -14,8 +14,8 @@ class Discovery
     /**
      * Get all of the instantiable classes by searching the given directory.
      *
-     * @param string $path
-     * @param string|null $basePath
+     * @param  string  $path
+     * @param  string|null  $basePath
      * @return \Illuminate\Support\Collection
      */
     public static function within(
@@ -26,7 +26,7 @@ class Discovery
         $basePath = $basePath ?: base_path();
 
         $files = (new Finder)->files()->in(
-            Str::finish($basePath, '/') . ltrim($path, DIRECTORY_SEPARATOR)
+            Str::finish($basePath, '/').ltrim($path, DIRECTORY_SEPARATOR)
         );
 
         $classes = collect();
@@ -38,7 +38,7 @@ class Discovery
                 continue;
             }
 
-            if ($filter && !$filter($class)) {
+            if ($filter && ! $filter($class)) {
                 continue;
             }
 
@@ -51,22 +51,22 @@ class Discovery
     /**
      * Get all of the abstract classes by searching the given directory.
      *
-     * @param string $path
-     * @param string|null $basePath
+     * @param  string  $path
+     * @param  string|null  $basePath
      * @return \Illuminate\Support\Collection
      */
     public static function abstractsWithin(string $path, string $basePath = null)
     {
         return static::within($path, $basePath, function (ReflectionClass $class) {
-            return $class->isAbstract() && !$class->isInterface() && !$class->isTrait();
+            return $class->isAbstract() && ! $class->isInterface() && ! $class->isTrait();
         });
     }
 
     /**
      * Get all of the classes by searching the given directory.
      *
-     * @param string $path
-     * @param string|null $basePath
+     * @param  string  $path
+     * @param  string|null  $basePath
      * @return \Illuminate\Support\Collection
      */
     public static function classesWithin(string $path, string $basePath = null)
@@ -79,8 +79,8 @@ class Discovery
     /**
      * Get all of the interfaces by searching the given directory.
      *
-     * @param string $path
-     * @param string|null $basePath
+     * @param  string  $path
+     * @param  string|null  $basePath
      * @return \Illuminate\Support\Collection
      */
     public static function interfacesWithin(string $path, string $basePath = null)
@@ -93,8 +93,8 @@ class Discovery
     /**
      * Get all of the traits by searching the given directory.
      *
-     * @param string $path
-     * @param string|null $basePath
+     * @param  string  $path
+     * @param  string|null  $basePath
      * @return \Illuminate\Support\Collection
      */
     public static function traitsWithin(string $path, string $basePath = null)
@@ -107,10 +107,10 @@ class Discovery
     /**
      * Get all of the classes that use the given trait by searching the given directory.
      *
-     * @param string $path
-     * @param string $trait
-     * @param bool $recursive
-     * @param string|null $basePath
+     * @param  string  $path
+     * @param  string  $trait
+     * @param  bool  $recursive
+     * @param  string|null  $basePath
      * @return \Illuminate\Support\Collection
      */
     public static function usesWithin(string $path, string $trait, bool $recursive = true, string $basePath = null)
@@ -123,9 +123,9 @@ class Discovery
     /**
      * Get all of the classes that implement the given interface by searching the given directory.
      *
-     * @param string $path
-     * @param string $interface
-     * @param string|null $basePath
+     * @param  string  $path
+     * @param  string  $interface
+     * @param  string|null  $basePath
      * @return \Illuminate\Support\Collection
      */
     public static function implementsWithin(string $path, string $interface, string $basePath = null)
@@ -138,9 +138,9 @@ class Discovery
     /**
      * Get all of the classes that extend the given class by searching the given directory.
      *
-     * @param string $path
-     * @param string $interface
-     * @param string|null $basePath
+     * @param  string  $path
+     * @param  string  $interface
+     * @param  string|null  $basePath
      * @return \Illuminate\Support\Collection
      */
     public static function extendsWithin(string $path, string $parent, string $basePath = null)
@@ -153,8 +153,8 @@ class Discovery
     /**
      * Extract the class name from the given file path.
      *
-     * @param \SplFileInfo $file
-     * @param string $basePath
+     * @param  \SplFileInfo  $file
+     * @param  string  $basePath
      * @return string
      */
     protected static function classFromFile(SplFileInfo $file, $basePath)
@@ -162,7 +162,7 @@ class Discovery
         $class = trim(Str::replaceFirst($basePath, '', $file->getRealPath()), DIRECTORY_SEPARATOR);
 
         return str_replace(
-            [DIRECTORY_SEPARATOR, ucfirst(basename(app()->path())) . '\\'],
+            [DIRECTORY_SEPARATOR, ucfirst(basename(app()->path())).'\\'],
             ['\\', app()->getNamespace()],
             ucfirst(Str::replaceLast('.php', '', $class))
         );
