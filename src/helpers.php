@@ -147,9 +147,9 @@ if (! function_exists('___')) {
      * Translate given messages and glue them together.
      *
      * @param  array  $keys  Translation keys / strings that will be translated.
-     * @param  array  $replace  Wildcards to be replaced. 
+     * @param  array  $replace  Wildcards to be replaced.
      *                          Example: `['name' => 'value']` would replace `:name` with `value` in given keys.
-     * @param  array  $numbers  Array of numbers that dictate whether choice 
+     * @param  array  $numbers  Array of numbers that dictate whether choice
      *                          translation method will be utilized for matching index in `$keys` array.
      * @param  string|null  $locale  Locale for given translation keys.
      * @param  string  $glue  What the translated keys should be glued together with.
