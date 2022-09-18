@@ -8,9 +8,9 @@ if (! function_exists('class_uses_trait')) {
     /**
      * Return boolean value whether the given class uses given trait.
      *
-     * @param  mixed  $class An object (class instance) or a string (class name).
-     * @param  string  $trait Class name of the trait.
-     * @param  bool  $recursive Should trait's be found recursively.
+     * @param  mixed  $class  An object (class instance) or a string (class name).
+     * @param  string  $trait  Class name of the trait.
+     * @param  bool  $recursive  Should trait's be found recursively.
      * @return bool
      */
     function class_uses_trait($class, $trait, bool $recursive = true): bool
@@ -46,8 +46,8 @@ if (! function_exists('class_implements_interface')) {
     /**
      * Return boolean value whether the given class implements given interface.
      *
-     * @param  mixed  $class An object (class instance) or a string (class name).
-     * @param  string  $interface Class name of the interface.
+     * @param  mixed  $class  An object (class instance) or a string (class name).
+     * @param  string  $interface  Class name of the interface.
      * @return bool
      */
     function class_implements_interface($class, $interface): bool
@@ -60,8 +60,8 @@ if (! function_exists('class_extends')) {
     /**
      * Return boolean value whether the given class extends given parent class.
      *
-     * @param  mixed  $class An object (class instance) or a string (class name).
-     * @param  string  $interface Class name of the parent class.
+     * @param  mixed  $class  An object (class instance) or a string (class name).
+     * @param  string  $interface  Class name of the parent class.
      * @return bool
      */
     function class_extends($class, $parent): bool
@@ -101,7 +101,7 @@ if (! function_exists('trim_spaces')) {
 
 if (! function_exists('not_null')) {
     /**
-     * !is_null
+     * !is_null.
      *
      * @param  mixed  $var
      * @return bool
@@ -146,16 +146,13 @@ if (! function_exists('___')) {
     /**
      * Translate given messages and glue them together.
      *
-     * @param  array  $keys
-     * Translation keys / strings that will be translated.
-     * @param  array  $replace
-     * Wildcards to be replaced. Example: `['name' => 'value']` would replace `:name` with `value` in given keys.
-     * @param  array  $numbers
-     * Array of numbers that dictate whether choice translation method will be utilized for matching index in `$keys` array.
-     * @param  string|null  $locale
-     * Locale for given translation keys.
-     * @param  string  $glue
-     * What the translated keys should be glued together with.
+     * @param  array  $keys  Translation keys / strings that will be translated.
+     * @param  array  $replace  Wildcards to be replaced. 
+     *                          Example: `['name' => 'value']` would replace `:name` with `value` in given keys.
+     * @param  array  $numbers  Array of numbers that dictate whether choice 
+     *                          translation method will be utilized for matching index in `$keys` array.
+     * @param  string|null  $locale  Locale for given translation keys.
+     * @param  string  $glue  What the translated keys should be glued together with.
      * @return string
      */
     function ___(array $keys, array $replace = [], array $numbers = [], string $locale = null, string $glue = ' '): string
