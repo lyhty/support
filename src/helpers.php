@@ -4,6 +4,19 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 
+if (! function_exists('class_has_attribute')) {
+    /**
+     * Return boolean value whether the given class has given attribute.
+     *
+     * @param  mixed  $class  An object (class instance) or a string (class name).
+     * @param  string  $attribute  Name of the attribute class.
+     */
+    function class_has_attribute($class, $attribute): bool
+    {
+        return count((new ReflectionClass($class))->getAttributes($attribute)) > 0;
+    }
+}
+
 if (! function_exists('class_uses_trait')) {
     /**
      * Return boolean value whether the given class uses given trait.
@@ -11,7 +24,6 @@ if (! function_exists('class_uses_trait')) {
      * @param  mixed  $class  An object (class instance) or a string (class name).
      * @param  string  $trait  Class name of the trait.
      * @param  bool  $recursive  Should trait's be found recursively.
-     * @return bool
      */
     function class_uses_trait($class, $trait, bool $recursive = true): bool
     {
@@ -25,7 +37,6 @@ if (! function_exists('array_depth')) {
     /**
      * Return integer describing the max depth of the given array.
      *
-     * @param  array  $array
      * @return int
      */
     function array_depth(array $array)
@@ -48,7 +59,6 @@ if (! function_exists('class_implements_interface')) {
      *
      * @param  mixed  $class  An object (class instance) or a string (class name).
      * @param  string  $interface  Class name of the interface.
-     * @return bool
      */
     function class_implements_interface($class, $interface): bool
     {
@@ -62,7 +72,6 @@ if (! function_exists('class_extends')) {
      *
      * @param  mixed  $class  An object (class instance) or a string (class name).
      * @param  string  $interface  Class name of the parent class.
-     * @return bool
      */
     function class_extends($class, $parent): bool
     {
@@ -89,9 +98,6 @@ if (! function_exists('set_type')) {
 if (! function_exists('trim_spaces')) {
     /**
      * Trim spaces from string.
-     *
-     * @param  string  $string
-     * @return string
      */
     function trim_spaces(string $string): string
     {
@@ -104,7 +110,6 @@ if (! function_exists('not_null')) {
      * !is_null.
      *
      * @param  mixed  $var
-     * @return bool
      */
     function not_null($var): bool
     {
@@ -117,7 +122,6 @@ if (! function_exists('get_bool')) {
      * Get boolean value from given value. Accepts string true/false.
      *
      * @param  mixed  $value
-     * @return bool
      */
     function get_bool($value): bool
     {
@@ -132,9 +136,6 @@ if (! function_exists('get_bool')) {
 if (! function_exists('class_namespace')) {
     /**
      * Get namespace of given class.
-     *
-     * @param  string  $className
-     * @return string
      */
     function class_namespace(string $className): string
     {
@@ -153,7 +154,6 @@ if (! function_exists('___')) {
      *                          translation method will be utilized for matching index in `$keys` array.
      * @param  string|null  $locale  Locale for given translation keys.
      * @param  string  $glue  What the translated keys should be glued together with.
-     * @return string
      */
     function ___(array $keys, array $replace = [], array $numbers = [], string $locale = null, string $glue = ' '): string
     {
