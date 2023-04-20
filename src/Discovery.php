@@ -52,9 +52,9 @@ class Discovery
      */
     public static function attributesWithin(string $path, string $basePath = null)
     {
-        return static::within($path, $basePath, function (ReflectionClass $class) {
+        return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) {
             return count($class->getAttributes(Attribute::class)) > 0;
-        });
+        }));
     }
 
     /**
@@ -64,9 +64,9 @@ class Discovery
      */
     public static function abstractsWithin(string $path, string $basePath = null)
     {
-        return static::within($path, $basePath, function (ReflectionClass $class) {
+        return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) {
             return $class->isAbstract() && ! $class->isInterface() && ! $class->isTrait();
-        });
+        }));
     }
 
     /**
@@ -76,9 +76,9 @@ class Discovery
      */
     public static function classesWithin(string $path, string $basePath = null)
     {
-        return static::within($path, $basePath, function (ReflectionClass $class) {
+        return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) {
             return $class->isInstantiable();
-        });
+        }));
     }
 
     /**
@@ -88,9 +88,9 @@ class Discovery
      */
     public static function interfacesWithin(string $path, string $basePath = null)
     {
-        return static::within($path, $basePath, function (ReflectionClass $class) {
+        return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) {
             return $class->isInterface();
-        });
+        }));
     }
 
     /**
@@ -100,9 +100,9 @@ class Discovery
      */
     public static function traitsWithin(string $path, string $basePath = null)
     {
-        return static::within($path, $basePath, function (ReflectionClass $class) {
+        return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) {
             return $class->isTrait();
-        });
+        }));
     }
 
     /**
@@ -112,9 +112,9 @@ class Discovery
      */
     public static function usesWithin(string $path, string $trait, bool $recursive = true, string $basePath = null)
     {
-        return static::within($path, $basePath, function (ReflectionClass $class) use ($trait, $recursive) {
+        return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) use ($trait, $recursive) {
             return class_uses_trait($class->getName(), $trait, $recursive);
-        });
+        }));
     }
 
     /**
@@ -124,9 +124,9 @@ class Discovery
      */
     public static function implementsWithin(string $path, string $interface, string $basePath = null)
     {
-        return static::within($path, $basePath, function (ReflectionClass $class) use ($interface) {
+        return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) use ($interface) {
             return class_implements_interface($class->getName(), $interface);
-        });
+        }));
     }
 
     /**
@@ -136,9 +136,9 @@ class Discovery
      */
     public static function extendsWithin(string $path, string $parent, string $basePath = null)
     {
-        return static::within($path, $basePath, function (ReflectionClass $class) use ($parent) {
+        return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) use ($parent) {
             return class_extends($class->getName(), $parent);
-        });
+        }));
     }
 
     /**
@@ -148,9 +148,9 @@ class Discovery
      */
     public static function hasAttributeWithin(string $path, string $attribute, string $basePath = null)
     {
-        return static::within($path, $basePath, function (ReflectionClass $class) use ($attribute) {
+        return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) use ($attribute) {
             return class_has_attribute($class->getName(), $attribute);
-        });
+        }));
     }
 
     /**
