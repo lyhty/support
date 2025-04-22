@@ -155,7 +155,7 @@ if (! function_exists('___')) {
      * @param  string|null  $locale  Locale for given translation keys.
      * @param  string  $glue  What the translated keys should be glued together with.
      */
-    function ___(array $keys, array $replace = [], array $numbers = [], string $locale = null, string $glue = ' '): string
+    function ___(array $keys, array $replace = [], array $numbers = [], ?string $locale = null, string $glue = ' '): string
     {
         foreach ($keys as $index => &$key) {
             $key = isset($numbers[$index]) || Str::contains($key, '|')
