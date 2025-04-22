@@ -19,7 +19,7 @@ class Discovery
      */
     public static function within(
         string $path,
-        string $basePath = null,
+        ?string $basePath = null,
         ?Closure $filter = null
     ) {
         $basePath = $basePath ?: base_path();
@@ -50,7 +50,7 @@ class Discovery
     /**
      * Get all of the attribute classes by searching the given directory.
      */
-    public static function attributesWithin(string $path, string $basePath = null)
+    public static function attributesWithin(string $path, ?string $basePath = null)
     {
         return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) {
             return count($class->getAttributes(Attribute::class)) > 0;
@@ -62,7 +62,7 @@ class Discovery
      *
      * @return \Illuminate\Support\Collection
      */
-    public static function abstractsWithin(string $path, string $basePath = null)
+    public static function abstractsWithin(string $path, ?string $basePath = null)
     {
         return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) {
             return $class->isAbstract() && ! $class->isInterface() && ! $class->isTrait();
@@ -74,7 +74,7 @@ class Discovery
      *
      * @return \Illuminate\Support\Collection
      */
-    public static function classesWithin(string $path, string $basePath = null)
+    public static function classesWithin(string $path, ?string $basePath = null)
     {
         return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) {
             return $class->isInstantiable();
@@ -86,7 +86,7 @@ class Discovery
      *
      * @return \Illuminate\Support\Collection
      */
-    public static function interfacesWithin(string $path, string $basePath = null)
+    public static function interfacesWithin(string $path, ?string $basePath = null)
     {
         return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) {
             return $class->isInterface();
@@ -98,7 +98,7 @@ class Discovery
      *
      * @return \Illuminate\Support\Collection
      */
-    public static function traitsWithin(string $path, string $basePath = null)
+    public static function traitsWithin(string $path, ?string $basePath = null)
     {
         return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) {
             return $class->isTrait();
@@ -110,7 +110,7 @@ class Discovery
      *
      * @return \Illuminate\Support\Collection
      */
-    public static function usesWithin(string $path, string $trait, bool $recursive = true, string $basePath = null)
+    public static function usesWithin(string $path, string $trait, bool $recursive = true, ?string $basePath = null)
     {
         return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) use ($trait, $recursive) {
             return class_uses_trait($class->getName(), $trait, $recursive);
@@ -122,7 +122,7 @@ class Discovery
      *
      * @return \Illuminate\Support\Collection
      */
-    public static function implementsWithin(string $path, string $interface, string $basePath = null)
+    public static function implementsWithin(string $path, string $interface, ?string $basePath = null)
     {
         return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) use ($interface) {
             return class_implements_interface($class->getName(), $interface);
@@ -134,7 +134,7 @@ class Discovery
      *
      * @return \Illuminate\Support\Collection
      */
-    public static function extendsWithin(string $path, string $parent, string $basePath = null)
+    public static function extendsWithin(string $path, string $parent, ?string $basePath = null)
     {
         return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) use ($parent) {
             return class_extends($class->getName(), $parent);
@@ -146,7 +146,7 @@ class Discovery
      *
      * @return \Illuminate\Support\Collection
      */
-    public static function hasAttributeWithin(string $path, string $attribute, string $basePath = null)
+    public static function hasAttributeWithin(string $path, string $attribute, ?string $basePath = null)
     {
         return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) use ($attribute) {
             return class_has_attribute($class->getName(), $attribute);
