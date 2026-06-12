@@ -4,6 +4,7 @@ namespace Lyhty\Support;
 
 use Attribute;
 use Closure;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use ReflectionClass;
 use ReflectionException;
@@ -21,7 +22,7 @@ class Discovery
         string $path,
         ?string $basePath = null,
         ?Closure $filter = null
-    ) {
+    ): Collection {
         $basePath = $basePath ?: base_path();
 
         $files = (new Finder)->files()->in(
@@ -50,7 +51,7 @@ class Discovery
     /**
      * Get all of the attribute classes by searching the given directory.
      */
-    public static function attributesWithin(string $path, ?string $basePath = null)
+    public static function attributesWithin(string $path, ?string $basePath = null): Collection
     {
         return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) {
             return count($class->getAttributes(Attribute::class)) > 0;
@@ -59,10 +60,8 @@ class Discovery
 
     /**
      * Get all of the abstract classes by searching the given directory.
-     *
-     * @return \Illuminate\Support\Collection
      */
-    public static function abstractsWithin(string $path, ?string $basePath = null)
+    public static function abstractsWithin(string $path, ?string $basePath = null): Collection
     {
         return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) {
             return $class->isAbstract() && ! $class->isInterface() && ! $class->isTrait();
@@ -71,10 +70,8 @@ class Discovery
 
     /**
      * Get all of the classes by searching the given directory.
-     *
-     * @return \Illuminate\Support\Collection
      */
-    public static function classesWithin(string $path, ?string $basePath = null)
+    public static function classesWithin(string $path, ?string $basePath = null): Collection
     {
         return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) {
             return $class->isInstantiable();
@@ -83,10 +80,8 @@ class Discovery
 
     /**
      * Get all of the interfaces by searching the given directory.
-     *
-     * @return \Illuminate\Support\Collection
      */
-    public static function interfacesWithin(string $path, ?string $basePath = null)
+    public static function interfacesWithin(string $path, ?string $basePath = null): Collection
     {
         return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) {
             return $class->isInterface();
@@ -98,7 +93,7 @@ class Discovery
      *
      * @return \Illuminate\Support\Collection
      */
-    public static function traitsWithin(string $path, ?string $basePath = null)
+    public static function traitsWithin(string $path, ?string $basePath = null): Collection
     {
         return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) {
             return $class->isTrait();
@@ -110,7 +105,7 @@ class Discovery
      *
      * @return \Illuminate\Support\Collection
      */
-    public static function usesWithin(string $path, string $trait, bool $recursive = true, ?string $basePath = null)
+    public static function usesWithin(string $path, string $trait, bool $recursive = true, ?string $basePath = null): Collection
     {
         return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) use ($trait, $recursive) {
             return class_uses_trait($class->getName(), $trait, $recursive);
@@ -120,9 +115,12 @@ class Discovery
     /**
      * Get all of the classes that implement the given interface by searching the given directory.
      *
-     * @return \Illuminate\Support\Collection
+     * @template TInterface
+     *
+     * @param class-string<TInterface> $interface
+     * @return \Illuminate\Support\Collection<array-key,TInterface>
      */
-    public static function implementsWithin(string $path, string $interface, ?string $basePath = null)
+    public static function implementsWithin(string $path, string $interface, ?string $basePath = null): Collection
     {
         return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) use ($interface) {
             return class_implements_interface($class->getName(), $interface);
@@ -132,9 +130,12 @@ class Discovery
     /**
      * Get all of the classes that extend the given class by searching the given directory.
      *
-     * @return \Illuminate\Support\Collection
+     * @template TParent
+     *
+     * @param class-string<TParent> $parent
+     * @return \Illuminate\Support\Collection<array-key,TParent>
      */
-    public static function extendsWithin(string $path, string $parent, ?string $basePath = null)
+    public static function extendsWithin(string $path, string $parent, ?string $basePath = null): Collection
     {
         return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) use ($parent) {
             return class_extends($class->getName(), $parent);
@@ -146,7 +147,7 @@ class Discovery
      *
      * @return \Illuminate\Support\Collection
      */
-    public static function hasAttributeWithin(string $path, string $attribute, ?string $basePath = null)
+    public static function hasAttributeWithin(string $path, string $attribute, ?string $basePath = null): Collection
     {
         return once(fn () => static::within($path, $basePath, function (ReflectionClass $class) use ($attribute) {
             return class_has_attribute($class->getName(), $attribute);
@@ -159,7 +160,7 @@ class Discovery
      * @param  string  $basePath
      * @return string
      */
-    protected static function classFromFile(SplFileInfo $file, $basePath)
+    protected static function classFromFile(SplFileInfo $file, $basePath): string
     {
         $class = trim(Str::replaceFirst($basePath, '', $file->getRealPath()), DIRECTORY_SEPARATOR);
 

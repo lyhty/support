@@ -8,10 +8,10 @@ if (! function_exists('class_has_attribute')) {
     /**
      * Return boolean value whether the given class has given attribute.
      *
-     * @param  mixed  $class  An object (class instance) or a string (class name).
-     * @param  string  $attribute  Name of the attribute class.
+     * @param  object|string  $class  An object (class instance) or a string (class name).
+     * @param  string         $attribute  Name of the attribute class.
      */
-    function class_has_attribute($class, $attribute): bool
+    function class_has_attribute(object|string $class, string $attribute): bool
     {
         return count((new ReflectionClass($class))->getAttributes($attribute)) > 0;
     }
@@ -21,15 +21,15 @@ if (! function_exists('class_uses_trait')) {
     /**
      * Return boolean value whether the given class uses given trait.
      *
-     * @param  mixed  $class  An object (class instance) or a string (class name).
-     * @param  string  $trait  Class name of the trait.
-     * @param  bool  $recursive  Should trait's be found recursively.
+     * @param  object|string  $class  An object (class instance) or a string (class name).
+     * @param  string         $trait  Class name of the trait.
+     * @param  bool           $recursive  Should trait's be found recursively.
      */
-    function class_uses_trait($class, $trait, bool $recursive = true): bool
+    function class_uses_trait(object|string $class, string $trait, bool $recursive = true): bool
     {
         $func = $recursive ? 'class_uses_recursive' : 'class_uses';
 
-        return isset($func($class)[$trait]);
+        return isset(($func($class) ?: [])[$trait]);
     }
 }
 
@@ -39,7 +39,7 @@ if (! function_exists('array_depth')) {
      *
      * @return int
      */
-    function array_depth(array $array)
+    function array_depth(array $array): int
     {
         $depth = 0;
         $iteIte = new RecursiveIteratorIterator(new RecursiveArrayIterator($array));
@@ -57,12 +57,12 @@ if (! function_exists('class_implements_interface')) {
     /**
      * Return boolean value whether the given class implements given interface.
      *
-     * @param  mixed  $class  An object (class instance) or a string (class name).
-     * @param  string  $interface  Class name of the interface.
+     * @param  object|string  $class  An object (class instance) or a string (class name).
+     * @param  string         $interface  Class name of the interface.
      */
-    function class_implements_interface($class, $interface): bool
+    function class_implements_interface(object|string $class, string $interface): bool
     {
-        return isset(class_implements($class)[$interface]);
+        return isset((class_implements($class) ?: [])[$interface]);
     }
 }
 
@@ -70,24 +70,20 @@ if (! function_exists('class_extends')) {
     /**
      * Return boolean value whether the given class extends given parent class.
      *
-     * @param  mixed  $class  An object (class instance) or a string (class name).
-     * @param  string  $interface  Class name of the parent class.
+     * @param  object|string  $class  An object (class instance) or a string (class name).
+     * @param  string         $parent  Class name of the parent class.
      */
-    function class_extends($class, $parent): bool
+    function class_extends(object|string $class, string $parent): bool
     {
-        return isset(class_parents($class)[$parent]);
+        return isset((class_parents($class) ?: [])[$parent]);
     }
 }
 
 if (! function_exists('set_type')) {
     /**
      * Alias for 'settype' which allows non-variables as arguments.
-     *
-     * @param  mixed  $value
-     * @param  string  $type
-     * @return void
      */
-    function set_type($value, $type)
+    function set_type(mixed $value, string $type): mixed
     {
         settype($value, $type);
 
@@ -108,10 +104,8 @@ if (! function_exists('trim_spaces')) {
 if (! function_exists('not_null')) {
     /**
      * !is_null.
-     *
-     * @param  mixed  $var
      */
-    function not_null($var): bool
+    function not_null(mixed $var): bool
     {
         return ! is_null($var);
     }
@@ -120,10 +114,8 @@ if (! function_exists('not_null')) {
 if (! function_exists('get_bool')) {
     /**
      * Get boolean value from given value. Accepts string true/false.
-     *
-     * @param  mixed  $value
      */
-    function get_bool($value): bool
+    function get_bool(mixed $value): bool
     {
         switch ($value) {
             case 'true': return true;

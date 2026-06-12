@@ -1,10 +1,6 @@
-<p>
-  <img src="https://matti.suoraniemi.com/storage/lyhty-support.png" width="400">
-</p>
-
 [![Latest Stable Version](https://img.shields.io/packagist/v/lyhty/support?style=flat-square&label=&logo=packagist&logoColor=white)](https://packagist.org/packages/lyhty/support)
 [![PHP](https://img.shields.io/packagist/php-v/lyhty/support?style=flat-square&label=&logo=php&logoColor=white)](https://packagist.org/packages/lyhty/support)
-[![Laravel](https://img.shields.io/static/v1?label=&message=^11%20|%20^12&color=red&style=flat-square&logo=laravel&logoColor=white)](https://packagist.org/packages/lyhty/support)
+[![Laravel](https://img.shields.io/static/v1?label=&message=^12%20|%20^13&color=red&style=flat-square&logo=laravel&logoColor=white)](https://packagist.org/packages/lyhty/support)
 [![Total Downloads](https://img.shields.io/packagist/dt/lyhty/support?style=flat-square)](https://packagist.org/packages/lyhty/support)
 [![License](https://img.shields.io/packagist/l/lyhty/support?style=flat-square)](https://packagist.org/packages/lyhty/support)
 
@@ -22,21 +18,23 @@ Install the package with Composer:
 
 ### Helpers
 
-- `class_uses_trait($class, $trait, bool $recursive = true): bool`
+- `class_has_attribute(object|string $class, string $attribute): bool`
+  - Return boolean value whether the given class has given attribute.
+- `class_uses_trait(object|string $class, string $trait, bool $recursive = true): bool`
   - Return boolean value whether the given class uses given trait.
-- `array_depth(array $array)`
+- `array_depth(array $array): int`
   - Return integer describing the max depth of the given array.
-- `class_implements_interface($class, $interface): bool`
+- `class_implements_interface(object|string $class, string $interface): bool`
   - Return boolean value whether the given class implements given interface.
-- `class_extends($class, $parent): bool`
+- `class_extends(object|string $class, string $parent): bool`
   - Return boolean value whether the given class extends given parent class.
-- `set_type($value, $type)`
+- `set_type(mixed $value, string $type): mixed`
   - Alias for 'settype' which allows non-variables as arguments.
 - `trim_spaces(string $string): string`
   - Trim spaces from string.
-- `not_null($var): bool`
+- `not_null(mixed $var): bool`
   - !is_null
-- `get_bool($value): bool`
+- `get_bool(mixed $value): bool`
   - Get boolean value from given value. Accepts string true/false.
 - `class_namespace(string $className): string`
   - Get namespace of given class.
