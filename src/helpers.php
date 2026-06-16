@@ -27,9 +27,7 @@ if (! function_exists('class_uses_trait')) {
      */
     function class_uses_trait(object|string $class, string $trait, bool $recursive = true): bool
     {
-        $func = $recursive ? 'class_uses_recursive' : 'class_uses';
-
-        return isset(($func($class) ?: [])[$trait]);
+        return isset((($recursive ? class_uses_recursive(...) : class_uses(...))($class) ?: [])[$trait]);
     }
 }
 
@@ -57,8 +55,12 @@ if (! function_exists('class_implements_interface')) {
     /**
      * Return boolean value whether the given class implements given interface.
      *
-     * @param  object|string  $class  An object (class instance) or a string (class name).
-     * @param  string         $interface  Class name of the interface.
+     * @template T
+     *
+     * @param  object|string    $class      An object (class instance) or a string (class name).
+     * @param  class-string<T>  $interface  Class name of the interface.
+     *
+     * @phpstan-assert-if-true ($class is object ? T : class-string<T>) $class
      */
     function class_implements_interface(object|string $class, string $interface): bool
     {
@@ -70,8 +72,12 @@ if (! function_exists('class_extends')) {
     /**
      * Return boolean value whether the given class extends given parent class.
      *
-     * @param  object|string  $class  An object (class instance) or a string (class name).
-     * @param  string         $parent  Class name of the parent class.
+     * @template T
+     *
+     * @param  object|string    $class   An object (class instance) or a string (class name).
+     * @param  class-string<T>  $parent  Class name of the parent class.
+     *
+     * @phpstan-assert-if-true ($class is object ? T : class-string<T>) $class
      */
     function class_extends(object|string $class, string $parent): bool
     {
@@ -103,9 +109,16 @@ if (! function_exists('trim_spaces')) {
 
 if (! function_exists('not_null')) {
     /**
-     * !is_null.
+     * !is_null
+     *
+     * @template TInput
+     *
+     * @param TInput|null $var
+     *
+     * @phpstan-assert-if-true TInput $var
+     * @psalm-assert-if-true TInput $var
      */
-    function not_null(mixed $var): bool
+    function not_null(mixed $var)
     {
         return ! is_null($var);
     }
