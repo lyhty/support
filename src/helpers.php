@@ -130,11 +130,11 @@ if (! function_exists('get_bool')) {
      */
     function get_bool(mixed $value): bool
     {
-        switch ($value) {
-            case 'true': return true;
-            case 'false': return false;
-            default: return set_type($value, 'boolean');
-        }
+        return match ($value) {
+            'true' => true,
+            'false' => false,
+            default => set_type($value, 'boolean')
+        };
     }
 }
 
